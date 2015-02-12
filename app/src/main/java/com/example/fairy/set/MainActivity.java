@@ -74,10 +74,8 @@ public class MainActivity extends Activity {
             selectedCards.add(game.getCardFromField(position));
             if (selectedCards.size() == 3) {
                 if (Game.isSet(selectedCards.get(0), selectedCards.get(1), selectedCards.get(2))) {
-                    mSelectText.setText("Greate, it was set. " + String.valueOf(position));
+                    mSelectText.setText("Grete, it was set. In deck now " + game.deckSize() + " cards.");
                     game.makeStep(selectedCards);
-                    // ((ImageAdapter) gridview.getAdapter()).notifyDataSetChanged();
-
 
                     try {
                         gridview.setAdapter(new ImageAdapter(gridview.getContext(), game));
@@ -90,7 +88,7 @@ public class MainActivity extends Activity {
 
                     mSetsOnField.setText("Thee are " + Game.findNumberSet(game.getField()) + " sets on the field now");
                 } else {
-                    mSelectText.setText("OMG, it is not set. Try again, man.");
+                    mSelectText.setText("It is not a set. Try again, please.");
                 }
                 selectedCards.clear();
             }
@@ -99,11 +97,8 @@ public class MainActivity extends Activity {
 
 
     public void addThreeCardsOnClick(View view) {
-        if (game.getField().getField().size() < 12){
-            mSetsOnField.setText("game.getField().getField().size() < 12" + " And " + Game.findNumberSet(game.getField()) + " sets");
+        if (game.getField().getField().size() < 15 && Game.findNumberSet(game.getField()) == 0) {
 
-            if( Game.findNumberSet(game.getField()) == 0) {
-                mSetsOnField.setText("Game.findNumberSet(game.getField()) == 0");
                 game.addThreeCards();
 
             // ((ImageAdapter) gridview.getAdapter()).notifyDataSetChanged();
@@ -118,7 +113,7 @@ public class MainActivity extends Activity {
 
             mSetsOnField.setText("Thee are " + Game.findNumberSet(game.getField()) + " sets on the field now");
         }
-        }
+
     }
 
     public void restartOnClick(View view) {
