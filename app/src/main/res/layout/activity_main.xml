@@ -18,20 +18,20 @@
         android:text="@string/hello" />
 
     <Button
+        style="?android:attr/buttonStyleSmall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/button"
-        android:layout_gravity="right"
-        android:background="@drawable/button_normal"  />
+        android:text="@string/RestartGame"
+        android:id="@+id/restartGameButton"
+        android:layout_gravity="center_horizontal"
+        android:onClick="restartOnClick" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/AddCard"
         android:id="@+id/addThreeCardButton"
-        android:onClick="addThreeCardOnClick"
-        android:background="@drawable/button_normal" />
+        android:onClick="addThreeCardsOnClick" />
 
     <GridView
         android:id="@+id/gridView1"

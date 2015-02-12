@@ -2,12 +2,12 @@ package com.example.fairy.set;
 
 
 import android.app.Activity;
-        import android.os.Bundle;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-        import android.widget.GridView;
-        import android.widget.TextView;
+import android.widget.GridView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -20,10 +20,11 @@ public class MainActivity extends Activity {
     private List<Card> selectedCards;
     private Game game;
     GridView gridview;
-//    private String TAG = "Жизненный цикл";
 
 
-    /** Called when the activity is first created. */
+    /**
+     * Called when the activity is first created.
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,11 +72,11 @@ public class MainActivity extends Activity {
             // выводим номер позиции
             mSelectText.setText("You choose card number" + String.valueOf(position));
             selectedCards.add(game.getCardFromField(position));
-            if(selectedCards.size()==3){
-                if(Game.isSet(selectedCards.get(0), selectedCards.get(1), selectedCards.get(2))){
+            if (selectedCards.size() == 3) {
+                if (Game.isSet(selectedCards.get(0), selectedCards.get(1), selectedCards.get(2))) {
                     mSelectText.setText("Greate, it was set. " + String.valueOf(position));
                     game.makeStep(selectedCards);
-                   // ((ImageAdapter) gridview.getAdapter()).notifyDataSetChanged();
+                    // ((ImageAdapter) gridview.getAdapter()).notifyDataSetChanged();
 
 
                     try {
@@ -88,7 +89,7 @@ public class MainActivity extends Activity {
 
 
                     mSetsOnField.setText("Thee are " + Game.findNumberSet(game.getField()) + " sets on the field now");
-                }else {
+                } else {
                     mSelectText.setText("OMG, it is not set. Try again, man.");
                 }
                 selectedCards.clear();
@@ -97,9 +98,13 @@ public class MainActivity extends Activity {
     };
 
 
-    public void addThreeCardOnClick(View view) {
-        if(game.getField().getField().size()<12 && Game.findNumberSet(game.getField())==0) {
-            game.addThreeCards();
+    public void addThreeCardsOnClick(View view) {
+        if (game.getField().getField().size() < 12){
+            mSetsOnField.setText("game.getField().getField().size() < 12" + " And " + Game.findNumberSet(game.getField()) + " sets");
+
+            if( Game.findNumberSet(game.getField()) == 0) {
+                mSetsOnField.setText("Game.findNumberSet(game.getField()) == 0");
+                game.addThreeCards();
 
             // ((ImageAdapter) gridview.getAdapter()).notifyDataSetChanged();
 
@@ -113,5 +118,18 @@ public class MainActivity extends Activity {
 
             mSetsOnField.setText("Thee are " + Game.findNumberSet(game.getField()) + " sets on the field now");
         }
+        }
+    }
+
+    public void restartOnClick(View view) {
+        try {
+            game = new Game();
+            gridview.setAdapter(new ImageAdapter(this, game));
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        mSetsOnField.setText("Thee are " + Game.findNumberSet(game.getField()) + " sets on the field now");
     }
 }
