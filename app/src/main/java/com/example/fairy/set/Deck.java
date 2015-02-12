@@ -12,18 +12,18 @@ public class Deck {
         }
     }
 
-    public void shuffle(){
-       Collections.shuffle(deck);
+    public void shuffle() {
+        Collections.shuffle(deck);
     }
 
 
-    public Card drawCard(){
+    public Card drawCard() {
         Card current = this.deck.get(0);
         this.deck.remove(0);
         return current;
     }
 
-    public int size(){
+    public int size() {
         return deck.size();
     }
 

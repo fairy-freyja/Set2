@@ -10,18 +10,18 @@ import java.util.List;
 public class Field {
     private List<Card> field;
 
-    public Field(List<Card> cards){
+    public Field(List<Card> cards) {
         field = cards;
     }
 
-    public Field(Deck deck){
+    public Field(Deck deck) {
         this.field = new ArrayList<Card>(15);
         for (int i = 0; i < 12; i++) {
             field.add(deck.drawCard());
         }
     }
 
-    public void addThreeCards(Deck deck){
+    public void addThreeCards(Deck deck) {
         // а есть ли вообще в колоде три карты?
         // сейчас, если карт в колоде недостаточно метод выкладывает сколько может.
 
@@ -30,7 +30,7 @@ public class Field {
         }
     }
 
-    public void addThreeCards(Deck deck, int[] index){
+    public void addThreeCards(Deck deck, int[] index) {
         // а есть ли вообще в колоде три карты?
         // сейчас, если карт в колоде недостаточно метод выкладывает сколько может.
 
@@ -39,7 +39,7 @@ public class Field {
         }
     }
 
-    public void removeTreeCards(int first, int second, int third){
+    public void removeTreeCards(int first, int second, int third) {
 
         int[] idx = {first, second, third};
         Arrays.sort(idx);
@@ -48,16 +48,16 @@ public class Field {
         field.remove(idx[0]);
     }
 
-    public List<Card> getField(){
+    public List<Card> getField() {
         return field;
 
     }
 
-    public  Card getCard(int i){
+    public Card getCard(int i) {
         return field.get(i);
     }
 
-    public int size(){
+    public int size() {
         return field.size();
     }
 

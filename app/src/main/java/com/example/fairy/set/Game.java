@@ -25,46 +25,46 @@ public class Game {
 
         int result = 0;
 
-        for (int i = 0; i<cards.size(); i++){
+        for (int i = 0; i < cards.size(); i++) {
             Card first = cards.get(i);
             verified.add(first);
-            for (int j = 0; j<cards.size(); j++){
-                if(verified.contains(cards.get(j))){
+            for (int j = 0; j < cards.size(); j++) {
+                if (verified.contains(cards.get(j))) {
                     continue;
                 }
                 Card second = cards.get(j);
-                if(cards.contains(needForSet(first, second))){
-                    result ++;
+                if (cards.contains(needForSet(first, second))) {
+                    result++;
                 }
             }
         }
-        return result/2;
+        return result / 2;
     }
 
-    public static int findNumberSet (Field field) {
+    public static int findNumberSet(Field field) {
         List<Card> cards = field.getField();
 
-        int result=0;
+        int result = 0;
         for (int i = 0; i < cards.size(); i++) {
-            Card first =  cards.get(i);
-            for (int j = 0; j < cards.size(); j++){
-                if (j == i){
+            Card first = cards.get(i);
+            for (int j = 0; j < cards.size(); j++) {
+                if (j == i) {
                     continue;
                 }
                 Card second = cards.get(j);
-                for (int k = 0; k < cards.size(); k++){
-                    if(k == i || k == j){
+                for (int k = 0; k < cards.size(); k++) {
+                    if (k == i || k == j) {
                         continue;
                     }
                     Card third = cards.get(k);
-                    if(isSet(first, second, third)){
+                    if (isSet(first, second, third)) {
                         result++;
                     }
                 }
             }
         }
 
-        return result/6;
+        return result / 6;
 
     }
 
@@ -72,7 +72,7 @@ public class Game {
         return new Card(Color.complementary(first.getColor(), second.getColor()), Fill.complementary(first.getFill(), second.getFill()), Quantity.complementary(first.getQuantity(), second.getQuantity()), Shape.complementary(first.getShape(), second.getShape()));
     }
 
-    public static boolean isSet(Card first, Card second, Card third){
+    public static boolean isSet(Card first, Card second, Card third) {
         boolean colorSet = canBeSet(first.getColor(), second.getColor(), third.getColor());
         boolean shapeSet = canBeSet(first.getShape(), second.getShape(), third.getShape());
         boolean fillSet = canBeSet(first.getFill(), second.getFill(), third.getFill());
@@ -87,7 +87,7 @@ public class Game {
 
     public static void main(String[] args) throws NoSuchFieldException, IllegalAccessException {
         Deck deck = new Deck();
-    //    deck.shuffle();
+        //    deck.shuffle();
         Field field = new Field(deck);
         FieldDrawer fieldDrawer = new FieldDrawer();
         fieldDrawer.toConsole(field);
@@ -96,7 +96,7 @@ public class Game {
 
         // надо написать тест для метода isSet
         boolean setTrue = false;
-        while(!setTrue) {
+        while (!setTrue) {
             Scanner sc = new Scanner(System.in);
             int first = sc.nextInt();
             int second = sc.nextInt();
@@ -105,7 +105,7 @@ public class Game {
 
             setTrue = isSet(field.getField().get(first), field.getField().get(second), field.getField().get(third));
             System.out.println("your set is " + setTrue);
-            if(setTrue){
+            if (setTrue) {
                 field.removeTreeCards(first, second, third);
             }
         }
@@ -117,27 +117,27 @@ public class Game {
 
     }
 
-    public void makeStep (List<Card> cards){
+    public void makeStep(List<Card> cards) {
         int[] indexCardsinSet = {field.getField().indexOf(cards.get(0)), field.getField().indexOf(cards.get(1)), field.getField().indexOf(cards.get(2))};
         field.removeTreeCards(indexCardsinSet[0], indexCardsinSet[1], indexCardsinSet[2]);
-        if(field.getField().size()==9) {
+        if (field.getField().size() == 9) {
             field.addThreeCards(deck, indexCardsinSet);
         }
     }
 
-    public void addThreeCards (){
+    public void addThreeCards() {
         field.addThreeCards(deck);
     }
 
-    public Card getCardFromField(int i){
+    public Card getCardFromField(int i) {
         return field.getCard(i);
     }
 
-    public Deck getDeck(){
+    public Deck getDeck() {
         return deck;
     }
 
-    public Field getField(){
+    public Field getField() {
         return field;
     }
 }

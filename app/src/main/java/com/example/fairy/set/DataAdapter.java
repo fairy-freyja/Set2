@@ -3,6 +3,7 @@ package com.example.fairy.set;
 /**
  * Created by Wyvern on 18.01.2015.
  */
+
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,9 +12,9 @@ import android.widget.TextView;
 
 public class DataAdapter extends ArrayAdapter<String> {
 
-    private static final String[] mContacts = { "Рыжик", "Барсик", "Мурзик",
+    private static final String[] mContacts = {"Рыжик", "Барсик", "Мурзик",
             "Мурка", "Васька", "Полосатик", "Матроскин", "Лизка", "Томосина",
-            "Бегемот", "Чеширский", "Дивуар", "Тигра", "Лаура" };
+            "Бегемот", "Чеширский", "Дивуар", "Тигра", "Лаура"};
 
     Context mContext;
 

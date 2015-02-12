@@ -1,4 +1,5 @@
 package com.example.fairy.set;
+
 /**
  * Created by fairy on 06.01.15.
  */
@@ -15,7 +16,7 @@ public class Card {
         this.quantity = quantity;
         this.shape = shape;
 //        try {
-           pictureLink = setPictureLink();
+        pictureLink = setPictureLink();
 //        } catch (Exception e){
 //            System.out.println("IN CARD CLASS OLOLO" + e.getMessage());
 //        }
@@ -36,60 +37,62 @@ public class Card {
 
         int fillCode = num % 3;
         Fill fill = null;
-        if (fillCode == 0){
+        if (fillCode == 0) {
             fill = fill.Blank;
-        } else if (fillCode == 1){
+        } else if (fillCode == 1) {
             fill = fill.Stroke;
-        } else if (fillCode == 2){
+        } else if (fillCode == 2) {
             fill = fill.Filled;
         }
         num = num / 3;
 
         int quantityCode = num % 3;
         Quantity quantity = null;
-        if (quantityCode == 0){
+        if (quantityCode == 0) {
             quantity = Quantity.One;
-        } else if (quantityCode == 1){
+        } else if (quantityCode == 1) {
             quantity = Quantity.Two;
-        } else if (quantityCode == 2){
+        } else if (quantityCode == 2) {
             quantity = Quantity.Three;
         }
         num = num / 3;
 
         int shapeCode = num % 3;
         Shape shape = null;
-        if (shapeCode == 0){
+        if (shapeCode == 0) {
             shape = Shape.Oval;
-        } else if (shapeCode == 1){
+        } else if (shapeCode == 1) {
             shape = Shape.Diamond;
-        } else if (shapeCode == 2){
+        } else if (shapeCode == 2) {
             shape = Shape.Squiggles;
         }
 
         return new Card(color, fill, quantity, shape);
     }
 
-    public Color getColor(){
+    public Color getColor() {
         return color;
     }
 
-    public Fill getFill(){
+    public Fill getFill() {
         return fill;
     }
 
-    public Quantity getQuantity (){
+    public Quantity getQuantity() {
         return quantity;
     }
 
-    public Shape getShape (){
+    public Shape getShape() {
         return shape;
     }
 
-    public String getPicLink () {return pictureLink; }
+    public String getPicLink() {
+        return pictureLink;
+    }
 
     @Override
-    public boolean equals(Object other){
-        if(other.getClass() != Card.class){
+    public boolean equals(Object other) {
+        if (other.getClass() != Card.class) {
             return false;
         }
         Card otherCard = (Card) other;
@@ -98,7 +101,7 @@ public class Card {
     }
 
     @Override
-    public int hashCode(){
+    public int hashCode() {
         return toString().hashCode();
     }
 
@@ -108,11 +111,10 @@ public class Card {
     }
 
 
-
-    public String setPictureLink(){
+    public String setPictureLink() {
         String result;
         result = this.getColor().toString().toLowerCase() + "_" + this.getShape().toString().toLowerCase() + "_" + this.getFill().toString().toLowerCase() + "_" + this.getQuantity().toString().toLowerCase();
-        return  result;
+        return result;
     }
 
 
