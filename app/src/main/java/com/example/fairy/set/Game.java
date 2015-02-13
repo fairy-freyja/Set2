@@ -18,28 +18,6 @@ public class Game {
         field = new Field(deck);
     }
 
-    public static int setNumber(Field field) throws NoSuchFieldException, IllegalAccessException {
-        // фигню пишет, работает неправильно.
-        List<Card> cards = field.getField();
-        List<Card> verified = new ArrayList<Card>();
-
-        int result = 0;
-
-        for (int i = 0; i < cards.size(); i++) {
-            Card first = cards.get(i);
-            verified.add(first);
-            for (int j = 0; j < cards.size(); j++) {
-                if (verified.contains(cards.get(j))) {
-                    continue;
-                }
-                Card second = cards.get(j);
-                if (cards.contains(needForSet(first, second))) {
-                    result++;
-                }
-            }
-        }
-        return result / 2;
-    }
 
     public static int findNumberSet(Field field) {
         List<Card> cards = field.getField();
@@ -85,6 +63,35 @@ public class Game {
         return (p1 == p2 && p1 == p3) || (p1 != p2 && p1 != p3 && p2 != p3);
     }
 
+
+    public void makeStep(List<Card> cards) {
+        int[] indexCardsinSet = {field.getField().indexOf(cards.get(0)), field.getField().indexOf(cards.get(1)), field.getField().indexOf(cards.get(2))};
+        field.removeTreeCards(indexCardsinSet[0], indexCardsinSet[1], indexCardsinSet[2]);
+        if (field.getField().size() == 9) {
+            field.addThreeCards(deck, indexCardsinSet);
+        }
+    }
+
+    public void addThreeCards() {
+        field.addThreeCards(deck);
+    }
+
+    public Card getCardFromField(int i) {
+        return field.getCard(i);
+    }
+
+    public Deck getDeck() {
+        return deck;
+    }
+
+    public Field getField() {
+        return field;
+    }
+
+    public int deckSize(){
+        return deck.size();
+    }
+
     public static void main(String[] args) throws NoSuchFieldException, IllegalAccessException {
         Deck deck = new Deck();
         //    deck.shuffle();
@@ -117,27 +124,4 @@ public class Game {
 
     }
 
-    public void makeStep(List<Card> cards) {
-        int[] indexCardsinSet = {field.getField().indexOf(cards.get(0)), field.getField().indexOf(cards.get(1)), field.getField().indexOf(cards.get(2))};
-        field.removeTreeCards(indexCardsinSet[0], indexCardsinSet[1], indexCardsinSet[2]);
-        if (field.getField().size() == 9) {
-            field.addThreeCards(deck, indexCardsinSet);
-        }
-    }
-
-    public void addThreeCards() {
-        field.addThreeCards(deck);
-    }
-
-    public Card getCardFromField(int i) {
-        return field.getCard(i);
-    }
-
-    public Deck getDeck() {
-        return deck;
-    }
-
-    public Field getField() {
-        return field;
-    }
 }
